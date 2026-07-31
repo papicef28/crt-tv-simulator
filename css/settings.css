@@ -1,0 +1,266 @@
+/* Settings and Channel Management Styles */
+
+.settings-modal {
+    max-width: 900px;
+    max-height: 90vh;
+}
+
+.settings-tabs {
+    display: flex;
+    gap: 10px;
+    border-bottom: 2px solid var(--crt-accent);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.tab-btn {
+    padding: 10px 20px;
+    background: rgba(0, 255, 0, 0.1);
+    border: 1px solid rgba(0, 255, 0, 0.3);
+    color: #999;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+.tab-btn:hover {
+    background: rgba(0, 255, 0, 0.15);
+    border-color: var(--crt-accent);
+    color: var(--crt-accent);
+}
+
+.tab-btn.active {
+    background: rgba(0, 255, 0, 0.2);
+    border-color: var(--crt-accent);
+    color: var(--crt-accent);
+    text-shadow: 0 0 5px var(--crt-accent);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Channel List */
+.channel-settings-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.category-section {
+    background: rgba(0, 255, 0, 0.05);
+    border: 1px solid rgba(0, 255, 0, 0.2);
+    border-radius: 6px;
+    padding: 15px;
+}
+
+.category-title {
+    color: var(--crt-accent);
+    font-size: 16px;
+    margin-bottom: 15px;
+    text-transform: capitalize;
+    text-shadow: 0 0 5px var(--crt-accent);
+    border-bottom: 1px solid rgba(0, 255, 0, 0.2);
+    padding-bottom: 10px;
+}
+
+.channel-items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 10px;
+}
+
+.channel-item-edit {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 255, 0, 0.2);
+    border-radius: 4px;
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.channel-item-edit:hover {
+    background: rgba(0, 255, 0, 0.1);
+    border-color: var(--crt-accent);
+}
+
+.channel-item-edit:active {
+    opacity: 0.7;
+}
+
+.channel-item-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+}
+
+.channel-item-number {
+    background: var(--crt-accent);
+    color: #000;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-weight: bold;
+    font-size: 12px;
+    min-width: 40px;
+    text-align: center;
+}
+
+.channel-item-name {
+    color: #999;
+    font-size: 14px;
+}
+
+.channel-item-edit:hover .channel-item-name {
+    color: var(--crt-accent);
+}
+
+.channel-item-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-edit-channel {
+    padding: 6px 10px;
+    background: var(--crt-accent);
+    color: #000;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s ease;
+    font-size: 12px;
+}
+
+.btn-edit-channel:hover {
+    box-shadow: 0 0 8px var(--crt-accent);
+}
+
+/* Add Channel Form */
+.add-channel-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background: rgba(0, 255, 0, 0.05);
+    border: 1px solid rgba(0, 255, 0, 0.2);
+    border-radius: 6px;
+    padding: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    color: var(--crt-accent);
+    font-weight: bold;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.form-group input {
+    padding: 10px;
+    background: #222;
+    border: 1px solid rgba(0, 255, 0, 0.3);
+    border-radius: 4px;
+    color: var(--crt-accent);
+    font-size: 14px;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--crt-accent);
+    box-shadow: 0 0 8px rgba(0, 255, 0, 0.3);
+}
+
+.form-group input[type="color"] {
+    height: 40px;
+    cursor: pointer;
+}
+
+/* Edit Modal */
+.edit-modal {
+    max-width: 500px;
+}
+
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.btn-secondary {
+    background: linear-gradient(180deg, #444, #222) !important;
+    border-color: #555 !important;
+}
+
+.btn-danger {
+    background: linear-gradient(180deg, #cc0000, #990000) !important;
+    border-color: #ff0000 !important;
+    color: #fff !important;
+}
+
+.btn-danger:hover {
+    background: linear-gradient(180deg, #ff0000, #aa0000) !important;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5) !important;
+}
+
+/* Reset Options */
+.reset-options {
+    background: rgba(255, 0, 0, 0.1);
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    border-radius: 6px;
+    padding: 20px;
+    text-align: center;
+}
+
+.reset-options p {
+    color: #999;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .settings-tabs {
+        flex-wrap: wrap;
+    }
+
+    .channel-items-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tab-btn {
+        flex: 1;
+        min-width: 100px;
+    }
+}

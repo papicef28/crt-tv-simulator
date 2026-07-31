@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRT TV 2011 - Channel Simulator</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/settings.css">
 </head>
 <body>
     <div class="crt-container">
@@ -79,6 +80,7 @@
                 <div class="main-controls">
                     <button class="btn-control power-btn" id="btnPower" title="Power">⏻ POWER</button>
                     <button class="btn-control" id="btnMenu" title="Menu">MENU</button>
+                    <button class="btn-control" id="btnSettings" title="Settings">⚙ SETUP</button>
                     <button class="btn-control" id="btnMute" title="Mute">MUTE</button>
                 </div>
             </div>
@@ -98,9 +100,90 @@
         </div>
     </div>
 
+    <!-- Settings Modal -->
+    <div class="modal" id="settingsModal">
+        <div class="modal-content settings-modal">
+            <div class="modal-header">
+                <h2>Channel Setup (Total: <span id="totalChannels">999</span> Channels)</h2>
+                <button class="modal-close" id="closeSettings">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="settings-tabs">
+                    <button class="tab-btn active" data-tab="channel-list">Channel List</button>
+                    <button class="tab-btn" data-tab="add-channel">Add Channel</button>
+                    <button class="tab-btn" data-tab="reset">Reset</button>
+                </div>
+
+                <!-- Channel List Tab -->
+                <div class="tab-content active" id="channel-list">
+                    <div class="channel-settings-list" id="channelSettingsList"></div>
+                </div>
+
+                <!-- Add Channel Tab -->
+                <div class="tab-content" id="add-channel">
+                    <div class="add-channel-form">
+                        <div class="form-group">
+                            <label for="newChannelNumber">Channel Number:</label>
+                            <input type="number" id="newChannelNumber" min="1" max="9999" placeholder="Enter channel number">
+                        </div>
+                        <div class="form-group">
+                            <label for="newChannelName">Channel Name:</label>
+                            <input type="text" id="newChannelName" placeholder="Enter channel name">
+                        </div>
+                        <div class="form-group">
+                            <label for="newChannelColor">Color:</label>
+                            <input type="color" id="newChannelColor" value="#00FF41">
+                        </div>
+                        <button class="btn-control" id="btnAddChannel">Add Channel</button>
+                    </div>
+                </div>
+
+                <!-- Reset Tab -->
+                <div class="tab-content" id="reset">
+                    <div class="reset-options">
+                        <p>Reset all channels to the default 999 channels configuration?</p>
+                        <button class="btn-control btn-danger" id="btnResetChannels">Reset to Defaults</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Channel Modal -->
+    <div class="modal" id="editChannelModal">
+        <div class="modal-content edit-modal">
+            <div class="modal-header">
+                <h2>Edit Channel</h2>
+                <button class="modal-close" id="closeEditChannel">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="edit-form">
+                    <div class="form-group">
+                        <label for="editChannelNumber">Channel Number:</label>
+                        <input type="number" id="editChannelNumber" min="1" max="9999">
+                    </div>
+                    <div class="form-group">
+                        <label for="editChannelName">Channel Name:</label>
+                        <input type="text" id="editChannelName">
+                    </div>
+                    <div class="form-group">
+                        <label for="editChannelColor">Color:</label>
+                        <input type="color" id="editChannelColor">
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn-control" id="btnSaveEdit">Save</button>
+                        <button class="btn-control btn-secondary" id="btnCancelEdit">Cancel</button>
+                        <button class="btn-control btn-danger" id="btnDeleteChannel">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Script Files -->
     <script src="js/channels.js"></script>
     <script src="js/tv-controller.js"></script>
+    <script src="js/channel-manager.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>
