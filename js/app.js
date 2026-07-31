@@ -1,12 +1,18 @@
 // Initialize the TV when the page loads
+let tv, channelManager;
+
 document.addEventListener('DOMContentLoaded', () => {
     // Create TV instance
-    const tv = new TVController();
+    tv = new TVController();
+    
+    // Create Channel Manager instance
+    channelManager = new ChannelManager(tv);
     
     // Add some visual enhancements
     addVisualEnhancements();
     
     console.log('CRT TV Simulator initialized!');
+    console.log('Total channels:', getTotalChannels());
 });
 
 // Visual Enhancements
@@ -34,5 +40,32 @@ if (window.performance && window.performance.timing) {
         const perfData = window.performance.timing;
         const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
         console.log('Page load time:', pageLoadTime, 'ms');
+        console.log('CRT TV - 999 Channels Full Stack Web Application');
+        console.log('Features:');
+        console.log('✓ 999 Channels across 15 categories');
+        console.log('✓ Channel editing and management');
+        console.log('✓ Channel arrangement by numbers');
+        console.log('✓ Add/Delete channels dynamically');
+        console.log('✓ LocalStorage persistence');
+        console.log('✓ Realistic CRT TV simulation');
     });
+}
+
+// Global keyboard shortcuts help
+window.addEventListener('keydown', (e) => {
+    // Press ? for help (optional feature)
+    if (e.key === '?') {
+        showKeyboardHelp();
+    }
+});
+
+function showKeyboardHelp() {
+    console.log('=== CRT TV Simulator - Keyboard Shortcuts ===');
+    console.log('Arrow Keys (↑/↓ or ←/→): Change channels');
+    console.log('Number Keys (0-9): Direct channel input');
+    console.log('Enter: Confirm channel selection');
+    console.log('P: Toggle Power');
+    console.log('M: Toggle Mute');
+    console.log('?: Show this help message');
+    console.log('==========================================');
 }
