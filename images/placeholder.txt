@@ -1,0 +1,38 @@
+# Channel Images Placeholder
+
+To complete the CRT TV Simulator, add the following images to this directory:
+
+## Channel Logos/Images
+- bbc-one.jpg
+- bbc-two.jpg
+- itv1.jpg
+- channel4.jpg
+- channel5.jpg
+- dave.jpg
+- gold.jpg
+- itv2.jpg
+- scifi.jpg
+- box.jpg
+- mtv.jpg
+- e-news.jpg
+
+## Recommended Image Specifications
+- Format: JPG or PNG
+- Dimensions: 1920x1080 (16:9 aspect ratio)
+- File size: Under 500KB per image
+- Color profile: RGB
+
+## Placeholder Options
+1. Use gradient backgrounds (CSS fallback already included)
+2. Download actual channel logos from official sources
+3. Use placeholder services like:
+   - placeholder.com
+   - placeimg.com
+   - picsum.photos
+
+Example: `bbc-one.jpg` could be:
+```html
+<img src="images/bbc-one.jpg" alt="BBC One Channel">
+```
+
+Current fallback uses channel-specific gradient colors.

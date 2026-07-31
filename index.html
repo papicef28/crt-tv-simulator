@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRT TV 2011 - Channel Simulator</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="crt-container">
+        <!-- CRT TV Shell -->
+        <div class="crt-tv">
+            <!-- Screen Frame -->
+            <div class="screen-frame">
+                <div class="screen">
+                    <div class="scanlines"></div>
+                    <div class="screen-content">
+                        <!-- Channel Display -->
+                        <div class="channel-display" id="channelDisplay">
+                            <div class="channel-info">
+                                <span class="channel-number" id="channelNumber">1</span>
+                                <span class="channel-name" id="channelName">BBC One</span>
+                            </div>
+                            <div class="video-area" id="videoArea">
+                                <img id="channelImage" src="images/bbc-one.jpg" alt="Channel Content">
+                                <div class="program-info">
+                                    <div class="program-title" id="programTitle">EastEnders</div>
+                                    <div class="program-time" id="programTime">20:00 - 20:30</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Control Panel -->
+            <div class="control-panel">
+                <!-- Power and Status Lights -->
+                <div class="status-lights">
+                    <div class="light power-light" id="powerLight"></div>
+                    <span class="label">POWER</span>
+                </div>
+
+                <!-- Channel Controls -->
+                <div class="channel-controls">
+                    <button class="btn-channel" id="btnPrevChannel" title="Previous Channel">&lt;</button>
+                    <div class="channel-display-small" id="channelDisplaySmall">01</div>
+                    <button class="btn-channel" id="btnNextChannel" title="Next Channel">&gt;</button>
+                </div>
+
+                <!-- Volume Control -->
+                <div class="volume-control">
+                    <label for="volumeSlider">VOL</label>
+                    <input type="range" id="volumeSlider" min="0" max="100" value="50" class="slider">
+                    <span id="volumeValue">50</span>
+                </div>
+
+                <!-- Brightness Control -->
+                <div class="brightness-control">
+                    <label for="brightnessSlider">BRIGHT</label>
+                    <input type="range" id="brightnessSlider" min="0" max="100" value="100" class="slider">
+                    <span id="brightnessValue">100</span>
+                </div>
+
+                <!-- Color Control -->
+                <div class="color-control">
+                    <label for="colorSlider">COLOR</label>
+                    <input type="range" id="colorSlider" min="0" max="100" value="100" class="slider">
+                    <span id="colorValue">100</span>
+                </div>
+
+                <!-- Direct Channel Input -->
+                <div class="direct-input">
+                    <input type="text" id="directChannelInput" placeholder="CH" maxlength="3" class="direct-input-field">
+                    <button class="btn-go" id="btnGo">GO</button>
+                </div>
+
+                <!-- Main Controls -->
+                <div class="main-controls">
+                    <button class="btn-control power-btn" id="btnPower" title="Power">⏻ POWER</button>
+                    <button class="btn-control" id="btnMenu" title="Menu">MENU</button>
+                    <button class="btn-control" id="btnMute" title="Mute">MUTE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Channel Guide Modal -->
+    <div class="modal" id="channelGuideModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Channel Guide</h2>
+                <button class="modal-close" id="closeChannelGuide">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="channel-list" id="channelList"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Files -->
+    <script src="js/channels.js"></script>
+    <script src="js/tv-controller.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
