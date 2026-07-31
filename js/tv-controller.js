@@ -14,6 +14,7 @@ class TVController {
         this.setupEventListeners();
         this.displayChannel(this.currentChannel);
         this.updatePowerLight();
+        this.updateTotalChannelsDisplay();
     }
 
     setupEventListeners() {
@@ -86,13 +87,13 @@ class TVController {
         if (!channel) return;
 
         // Update channel info
-        document.getElementById('channelNumber').textContent = String(channel.number).padStart(2, '0');
+        document.getElementById('channelNumber').textContent = String(channel.number).padStart(3, '0');
         document.getElementById('channelName').textContent = channel.name;
-        document.getElementById('channelDisplaySmall').textContent = String(channel.number).padStart(2, '0');
+        document.getElementById('channelDisplaySmall').textContent = String(channel.number).padStart(3, '0');
 
-        // Update video area with gradient
+        // Update video area with channel color
         const videoArea = document.getElementById('videoArea');
-        videoArea.style.background = `linear-gradient(135deg, ${channel.color}20 0%, ${channel.color}05 100%)`;
+        videoArea.style.background = `linear-gradient(135deg, ${channel.color}30 0%, ${channel.color}10 100%)`;
 
         // Update program info
         const program = channel.programs[Math.floor(Math.random() * channel.programs.length)];
@@ -170,6 +171,8 @@ class TVController {
     }
 
     openChannelGuide() {
+        if (!this.isPowered) return;
+        
         const modal = document.getElementById('channelGuideModal');
         const channelList = document.getElementById('channelList');
         channelList.innerHTML = '';
@@ -178,9 +181,11 @@ class TVController {
         channels.forEach(channel => {
             const item = document.createElement('div');
             item.className = 'channel-item';
+            item.style.borderLeft = `4px solid ${channel.color}`;
             item.innerHTML = `
-                <span class="channel-item-number">${String(channel.number).padStart(2, '0')}</span>
+                <span class="channel-item-number">${String(channel.number).padStart(3, '0')}</span>
                 <span class="channel-item-name">${channel.name}</span>
+                <span class="channel-item-category">${channel.category}</span>
             `;
             item.addEventListener('click', () => {
                 this.goToChannel(channel.number);
@@ -196,6 +201,13 @@ class TVController {
         document.getElementById('channelGuideModal').classList.remove('show');
     }
 
+    updateTotalChannelsDisplay() {
+        const totalElement = document.getElementById('totalChannels');
+        if (totalElement) {
+            totalElement.textContent = getTotalChannels();
+        }
+    }
+
     handleKeyboard(e) {
         if (!this.isPowered) return;
 
@@ -204,7 +216,7 @@ class TVController {
         // Number keys for direct channel input
         if (key >= '0' && key <= '9') {
             const input = document.getElementById('directChannelInput');
-            if (input.value.length < 3) {
+            if (input.value.length < 4) {
                 input.value += key;
             }
         }
