@@ -1,4 +1,4 @@
-// TV Controller Class
+// TV Controller Class with YouTube Integration
 class TVController {
     constructor() {
         this.currentChannel = 1;
@@ -7,6 +7,7 @@ class TVController {
         this.brightness = 100;
         this.color = 100;
         this.isMuted = false;
+        this.youtubePlayer = null;
         this.init();
     }
 
@@ -15,6 +16,12 @@ class TVController {
         this.displayChannel(this.currentChannel);
         this.updatePowerLight();
         this.updateTotalChannelsDisplay();
+        
+        // Wait for YouTube player to be ready
+        setTimeout(() => {
+            this.youtubePlayer = window.youtubePlayer;
+            this.playChannelVideo();
+        }, 2000);
     }
 
     setupEventListeners() {
@@ -65,6 +72,7 @@ class TVController {
         }
         
         this.displayChannel(this.currentChannel);
+        this.playChannelVideo();
         this.playChannelChangeSound();
     }
 
@@ -75,6 +83,7 @@ class TVController {
         if (channel) {
             this.currentChannel = channel.number;
             this.displayChannel(this.currentChannel);
+            this.playChannelVideo();
             document.getElementById('directChannelInput').value = '';
             this.playChannelChangeSound();
         } else {
@@ -104,10 +113,37 @@ class TVController {
         this.updateScreenFilters();
     }
 
+    playChannelVideo() {
+        if (!this.youtubePlayer || !this.isPowered) return;
+
+        const channel = getChannel(this.currentChannel);
+        if (!channel) return;
+
+        // Get YouTube video ID for this channel
+        const videoId = getYouTubeVideoId(channel.name) || getRandomYouTubeVideo();
+
+        if (videoId) {
+            console.log(`Playing video: ${videoId} for channel: ${channel.name}`);
+            this.youtubePlayer.playVideo(videoId);
+            this.youtubePlayer.showPlayer();
+            this.updateYouTubeVolume();
+        } else {
+            this.youtubePlayer.showNoVideoMessage();
+        }
+    }
+
+    updateYouTubeVolume() {
+        if (!this.youtubePlayer) return;
+
+        const volume = this.isMuted ? 0 : this.volume;
+        this.youtubePlayer.setVolume(volume);
+    }
+
     setVolume(value) {
         this.volume = parseInt(value);
         document.getElementById('volumeValue').textContent = this.volume;
         if (this.isMuted) this.isMuted = false;
+        this.updateYouTubeVolume();
     }
 
     setBrightness(value) {
@@ -139,10 +175,14 @@ class TVController {
             powerBtn.classList.remove('off');
             screen.style.opacity = '1';
             this.playPowerSound();
+            this.playChannelVideo();
         } else {
             powerBtn.classList.add('off');
             screen.style.opacity = '0.2';
             this.playPowerOffSound();
+            if (this.youtubePlayer) {
+                this.youtubePlayer.stopVideo();
+            }
         }
         
         this.updatePowerLight();
@@ -164,9 +204,11 @@ class TVController {
         if (this.isMuted) {
             muteBtn.textContent = 'MUTE ON';
             muteBtn.style.background = 'linear-gradient(180deg, #ff6b6b, #cc0000)';
+            this.youtubePlayer.setVolume(0);
         } else {
             muteBtn.textContent = 'MUTE';
             muteBtn.style.background = 'linear-gradient(180deg, #555, #333)';
+            this.youtubePlayer.setVolume(this.volume);
         }
     }
 
@@ -234,6 +276,14 @@ class TVController {
             if (input.value) {
                 this.goToChannel(input.value);
                 input.value = '';
+            }
+        }
+
+        // Space to play/pause
+        if (e.key === ' ') {
+            e.preventDefault();
+            if (this.youtubePlayer) {
+                this.youtubePlayer.togglePlayPause();
             }
         }
     }
