@@ -7,7 +7,7 @@ const channelCategories = {
     music: ['MTV', 'MTV2', 'VH1', 'Country Music TV', 'Music Choice', 'BET Jams', 'Fuse', 'Revolt', 'AXS TV', 'Palladia'],
     documentaries: ['Discovery', 'National Geographic', 'BBC Documentary', 'History Channel', 'Animal Planet', 'Smithsonian', 'PBS', 'curiosity', 'Oxygen', 'Investigation Discovery'],
     kids: ['Cartoon Network', 'Disney Channel', 'Nickelodeon', 'CBeebies', 'CBBC', 'Boomerang', 'Kids WB', 'Treehouse', 'YTV', 'Teletoon'],
-    entertainment: ['E!', 'Bravo', 'TLC', 'VH1', 'Oxygen', 'Lifetime', 'Hallmark', 'AMC', 'IFC', 'Syfy'],
+    entertainment: ['E!', 'Bravo', 'TLC', 'VH1', 'Oxygen', 'Lifetime', 'Hallmark', 'AMC', 'ABC Family', 'Syfy'],
     cooking: ['Food Network', 'Cooking Channel', 'HGTV', 'DIY Network', 'Fine Living', 'Taste', 'Lifetime Movie Network', 'W Network', 'OWN', 'TLC'],
     lifestyle: ['Oprah', 'Dr. Oz', 'Ellen', 'Today Show', 'Good Morning America', 'The View', 'Live with Kelly', 'Wendy Williams', 'Rachael Ray', 'Martha Stewart'],
     gaming: ['Twitch', 'Gaming TV', 'G4', 'Spike', 'TBS', 'Cartoon Network', 'Adult Swim', 'FunimationNow', 'Crunchyroll', 'IGN'],
