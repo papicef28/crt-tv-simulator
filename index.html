@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRT TV 2011 - Channel Simulator</title>
+    <title>CRT TV 2011 - Channel Simulator with YouTube</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/settings.css">
 </head>
@@ -20,13 +20,21 @@
                         <div class="channel-display" id="channelDisplay">
                             <div class="channel-info">
                                 <span class="channel-number" id="channelNumber">1</span>
-                                <span class="channel-name" id="channelName">BBC One</span>
+                                <span class="channel-name" id="channelName">BBC News</span>
                             </div>
+                            <!-- YouTube Player Container -->
                             <div class="video-area" id="videoArea">
-                                <img id="channelImage" src="images/bbc-one.jpg" alt="Channel Content">
+                                <div id="youtubePlayerContainer" style="width: 100%; height: 100%; position: relative;">
+                                    <div id="youtubePlayer" style="width: 100%; height: 100%;"></div>
+                                    <div id="noVideoMessage" style="display: none; width: 100%; height: 100%; background: linear-gradient(135deg, #333, #000); color: #00FF41; font-family: 'Courier New', monospace; justify-content: center; align-items: center; font-size: 18px; text-align: center; flex-direction: column; gap: 20px;">
+                                        <div>📺 NO SIGNAL 📺</div>
+                                        <div style="font-size: 14px; opacity: 0.7;">Video not available for this channel</div>
+                                    </div>
+                                </div>
+                                <!-- Program Info Overlay -->
                                 <div class="program-info">
-                                    <div class="program-title" id="programTitle">EastEnders</div>
-                                    <div class="program-time" id="programTime">20:00 - 20:30</div>
+                                    <div class="program-title" id="programTitle">Now Playing</div>
+                                    <div class="program-time" id="programTime">Live Stream</div>
                                 </div>
                             </div>
                         </div>
@@ -45,7 +53,7 @@
                 <!-- Channel Controls -->
                 <div class="channel-controls">
                     <button class="btn-channel" id="btnPrevChannel" title="Previous Channel">&lt;</button>
-                    <div class="channel-display-small" id="channelDisplaySmall">01</div>
+                    <div class="channel-display-small" id="channelDisplaySmall">001</div>
                     <button class="btn-channel" id="btnNextChannel" title="Next Channel">&gt;</button>
                 </div>
 
@@ -134,6 +142,10 @@
                             <label for="newChannelColor">Color:</label>
                             <input type="color" id="newChannelColor" value="#00FF41">
                         </div>
+                        <div class="form-group">
+                            <label for="newChannelVideoId">YouTube Video ID (optional):</label>
+                            <input type="text" id="newChannelVideoId" placeholder="Enter YouTube video ID">
+                        </div>
                         <button class="btn-control" id="btnAddChannel">Add Channel</button>
                     </div>
                 </div>
@@ -170,6 +182,10 @@
                         <label for="editChannelColor">Color:</label>
                         <input type="color" id="editChannelColor">
                     </div>
+                    <div class="form-group">
+                        <label for="editChannelVideoId">YouTube Video ID:</label>
+                        <input type="text" id="editChannelVideoId" placeholder="Enter YouTube video ID">
+                    </div>
                     <div class="form-actions">
                         <button class="btn-control" id="btnSaveEdit">Save</button>
                         <button class="btn-control btn-secondary" id="btnCancelEdit">Cancel</button>
@@ -182,6 +198,8 @@
 
     <!-- Script Files -->
     <script src="js/channels.js"></script>
+    <script src="js/channels-youtube.js"></script>
+    <script src="js/youtube-player.js"></script>
     <script src="js/tv-controller.js"></script>
     <script src="js/channel-manager.js"></script>
     <script src="js/app.js"></script>
