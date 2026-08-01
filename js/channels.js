@@ -1,4 +1,4 @@
-// Channel Database - 999 Channels with Categories
+// Channel Database - 999 Channels with Categories and YouTube Integration
 const channelCategories = {
     news: ['BBC News', 'Sky News', 'CNN International', 'Reuters TV', 'Associated Press News', 'France 24', 'Deutsche Welle', 'Al Jazeera', 'CNBC', 'Bloomberg TV'],
     sports: ['ESPN', 'Sky Sports', 'BT Sport', 'Eurosport', 'NBC Sports', 'Fox Sports', 'DAZN', 'Peacock Sports', 'Tennis Channel', 'Golf Channel'],
@@ -59,12 +59,15 @@ function generateChannels() {
             const startHour = (channelNumber % 24);
             const endHour = (startHour + 1) % 24;
 
+            // Get YouTube video ID for this channel
+            const videoId = getYouTubeVideoId(baseName) || getRandomYouTubeVideo();
+
             channels.push({
                 id: channelId,
                 number: channelNumber,
                 name: channelName,
                 category: category,
-                image: `images/channel-${channelNumber}.jpg`,
+                videoId: videoId,
                 color: genreColors[category] || generateRandomColor(),
                 programs: [
                     {
@@ -177,14 +180,14 @@ function getPreviousChannel(currentNumber) {
 }
 
 // Add new channel
-function addChannel(number, name, color, category = 'entertainment') {
+function addChannel(number, name, color, videoId = null, category = 'entertainment') {
     const newId = Math.max(...channelsDatabase.map(ch => ch.id), 0) + 1;
     const newChannel = {
         id: newId,
         number: parseInt(number),
         name: name,
         category: category,
-        image: `images/channel-${number}.jpg`,
+        videoId: videoId || getRandomYouTubeVideo(),
         color: color,
         programs: [
             { title: `${name} Show 1`, time: '20:00 - 21:00', description: `Featured program on ${name}` },
@@ -205,7 +208,7 @@ function addChannel(number, name, color, category = 'entertainment') {
 }
 
 // Update channel
-function updateChannel(id, number, name, color, category = 'entertainment') {
+function updateChannel(id, number, name, color, videoId = null, category = 'entertainment') {
     const channel = getChannelById(id);
     if (channel) {
         // Check if new number already exists and remove it
@@ -217,6 +220,7 @@ function updateChannel(id, number, name, color, category = 'entertainment') {
         channel.number = parseInt(number);
         channel.name = name;
         channel.color = color;
+        channel.videoId = videoId || channel.videoId;
         channel.category = category;
         saveChannels(channelsDatabase);
         return channel;
